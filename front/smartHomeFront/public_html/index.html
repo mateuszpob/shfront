@@ -9,31 +9,85 @@ and open the template in the editor.
         <title>huj</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/grid24.css" rel="stylesheet" />
         <style>
             #home-canvas {
-                box-shadow: 0px 0px 31px 9px;
+                box-shadow: 0px 0px 5px 1px;
                 float: left;
             }
-            .project-panel{
+            .sh-panel{
                 display: inline-block;
-                margin-left: 10px;
                 padding: 10px;
-                box-shadow: 0px 0px 31px 9px;
+                box-shadow: 0px 0px 5px 1px;
+                width: 200px;
             }
+            
         </style>
         
     </head>
     <body>
-        <div>
-            <canvas id="home-canvas" width="1366" height="768" ></canvas>
-            
-        </div>
-        <div class="project-panel pull-left">
-                <button id="addNewRoom">Add Room</button>
-                <button id="submitRoom" style="display:none;">Submit Room</button>
-            </div>
         
-        <script src="js/main.js"></script>
+        <canvas id="home-canvas" class="pull-left" width="1366" height="768" ></canvas>
+        <div class="sh-panel ml10 pull-left">
+            <button id="addNewRoom">Add Room</button>
+            <button id="submitRoom">Submit Room</button>
+        </div>
+        <select id="addInteriorItem">
+                                            <option selected value="add">Add element</option>
+                                            <option value="door">Door</option>
+                                            <option value="window">Window</option>
+                                        </select>
+        <div class="container-fluid">
+<!--            <div class="row">
+                <div class="col-md-18">
+                    <canvas id="home-canvas" width="1366" height="768" ></canvas>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-24">
+                            <div class="sh-panel ml10">
+                                <button id="addNewRoom">Add Room</button>
+                                <button id="submitRoom">Submit Room</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="roomNavPanel" data-room-id="" class="row hidden">
+                        <div class="col-md-24">
+                            <div class="sh-panel mt10 ml10 ">
+                                <div class="row">
+                                    <div class="col-md-24">
+                                        <button class="redBtn">Remove</button>
+                                    </div>
+                                </div>
+                                <div class="row mt10">
+                                    <div class="col-md-24">
+                                        <select id="addInteriorItem">
+                                            <option selected value="add">Add element</option>
+                                            <option value="door">Door</option>
+                                            <option value="window">Window</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-24">
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+        
+        <script src="js/sh/DrawableItem.js"></script>
+        <script src="js/sh/Door.js"></script>
+        <script src="js/sh/Room.js"></script>
+        <script src="js/sh/DrawController.js"></script>
+        <script src="js/sh/InteriorItemPanel.js"></script>
+        <script src="js/loop.js"></script>
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>-->
         <!--<script src="js/wthree.js"></script>-->
     </body>
