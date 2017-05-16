@@ -1,130 +1,126 @@
 
-<html><head>
-<title>Simple 3D on HTML5 canvas</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<script type="text/javascript">
+<html>
+    <head>
+        <title>Simple 3D on HTML5 canvas</title>
 
-function setup()
-{
+        <style type="text/css">
+            .container {
+                width: 1240px !important;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .row {
+                    padding: 0;
+            }
+            .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+                position: relative;
+                min-height: 1px;
+                float: left;
+            }
+            .col-md-1 {
+                width: 8.33333%;
+            }
+            .col-md-2 {
+                width: 16.66666%;
+            }
+            .col-md-3 {
+                width: 25%;
+            }
+            .col-md-4 {
+                width: 33.33333%;
+            }
+            .col-md-5 {
+                width: 41.6666%;
+            }
+            .col-md-6 {
+                width: 50%;
+            }
+            .col-md-7 {
+                width: 58.33333%;
+            }
+            .col-md-8 {
+                width: 66.66666%;
+            }
+            .col-md-9 {
+                width: 75%;
+            }
+            .col-md-10 {
+                width: 83.3333%;
+            }
+            .col-md-11 {
+                width: 91.6666%;
+            }
+            .col-md-12 {
+                width: 100%;
+            }
 
 
-var fov = 250;
-
-var SCREEN_WIDTH = 600; 
-var SCREEN_HEIGHT = 300; 
-
-var HALF_WIDTH = SCREEN_WIDTH/2; 
-var HALF_HEIGHT = SCREEN_HEIGHT/2; 
-
-var numPoints = 200; 
-
-var mouseX = 0; 
-var mouseY = -200; 
 
 
-function draw3Din2D(point3d)
-{  
-	x3d = point3d[0];
-	y3d = point3d[1]; 
-	z3d = point3d[2]; 
-	var scale = fov/(fov+z3d); 
-	var x2d = (x3d * scale) + HALF_WIDTH;	
-	var y2d = (y3d * scale)  + HALF_HEIGHT;
-	
-	
-	c.lineWidth= scale; 
-	c.strokeStyle = "rgb(255,255,255)"; 	
-	c.beginPath();
-	c.moveTo(x2d,y2d); 
-	c.lineTo(x2d+scale,y2d); 
-	c.stroke(); 
-	
-}
+            div {
+                outline: red;
+            }
 
-var canvas = document.getElementById('Canvas2D');
-var c = canvas.getContext('2d');
+            #huj {
+                width: 50%;
+                height: 100px;
+                border: 1px solid #00ff00;
+            }
 
-document.onmousemove = updateMouse;
-//canvas.addEventListener('mousemove', updateMouse, false);
+      
 
-var points = [];
 
-function initPoints()
-{
-	for (i=0; i<numPoints; i++)
-	{
-		point = [(Math.random()*400)-200, (Math.random()*400)-200 , (Math.random()*400)-200 ];
-		points.push(point); 
-	}
+            .left-slide-panel {
+                width: 200px;
+                border: 1px solid #00ff00;
+                height: 300px;
+                transition: all 0.5s;
+            }
+            
+            .slide-btn {
+                float: right;
+                width: 30px;
+                height: 40px;
+                background: #00ff00;
+                    margin-right: -30px;
+            }
+            
+            .left-slide-panel.hide {
+                margin-left: -215px;
+            }
 
-}
 
-function render() 
-{
+        </style>
+        <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="left-slide-panel hide">
+            <div class="slide-btn">
+                X
+            </div>
+        </div>
+                    
 
-	c.fillStyle="rgb(0,0,0)";
-  	c.fillRect(0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
-  	
-	for (i=0; i<numPoints; i++)
-	{
-		point3d = points[i]; 
-		rotatePointAroundY(point3d, mouseX*-0.0003); 
-		point3d[2] += (mouseY*0.08); 	
-		
-		
-		if(point3d[0]<-300) point3d[0] = 300; 
-		else if(point3d[0]>300) point3d[0] = -300; 
-		if(point3d[2]<-fov) point3d[2] = fov; 
-		else if(point3d[2]>249) point3d[2] = -249;
-		
-		draw3Din2D(point3d); 
+        
+        <script>
+            
+            $(document).ready(function() {
+                console.log('huj', 123, jQuery.console);
+                
+                $('.slide-btn').on('click', function(){
+                    $('.left-slide-panel').toggleClass('hide');
+                    
+                    
+                }); 
+                
+            });
+            
+        </script>
+        
+        
 
-	}
-}
-
-function rotatePointAroundY(point3d, angle)
-{
-	x = point3d[0]; 
-	z = point3d[2]+fov; 
-	
-	cosRY = Math.cos(angle);
-	sinRY = Math.sin(angle);
-	tempz = z; 
-	tempx = x; 
-
-	
-	x= (tempx*cosRY)+(tempz*sinRY);
-	z= (tempx*-sinRY)+(tempz*cosRY);
-	point3d[0] = x; 
-	point3d[2] = z-fov; 
-}
-
-function updateMouse(e) 
-{
-	//alert(c+" "+c.offsetLeft); 
-	mouseX = e.pageX - canvas.offsetLeft - HALF_WIDTH; 
-	mouseY = e.pageY - canvas.offsetTop - HALF_HEIGHT; ; 
-}
-
-initPoints();
-
-var loop = setInterval(function(){render();}, 50);
-
-}
-
-</script>
-<style type="text/css">body{background:#000;color:#fff;font-family:arial;font-size:90%;}.wrap{width:640px;margin:0 auto;}canvas{border:1px solid #0f0;}a{color:#0f0;}</style>
-</head><body onload="setup();">
-<div class="wrap">
-<canvas id="Canvas2D" width="600" height="300">Internet Explorer Not Supported :(</canvas>
-<h1>Simple 3D HTML5 Canvas</h1>
-<p>By <a href="http://sebleedelisle.com">Seb Lee-Delisle</a></p>
-<p>Simple 3D on HTML5 Canvas, as demoed at BarCampBrighton4. Move the mouse to fly around! More info at <a href="http://www.sebleedelisle.com/2009/09/simple-3d-in-html5-canvas">sebleedelisle.com</a>. </p>
-</div>
-<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-</script>
-<script type="text/javascript">
-_uacct = "UA-809606-2";
-urchinTracker();
-</script>
-</body></html>
+    </body>
+</html>

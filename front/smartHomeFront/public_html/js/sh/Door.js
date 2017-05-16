@@ -33,5 +33,14 @@ class Door extends DrawableItem {
             }
         });
     };
+    detectParentRoom () {
+        var inst = this;
+        DrawController.drawingObjects.forEach(function(o, i){
+            if(o.id === inst.roomId){
+                inst.room = o;
+                return;
+            }
+        });
+    }
 
 }

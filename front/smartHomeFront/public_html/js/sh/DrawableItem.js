@@ -29,10 +29,8 @@ class DrawableItem {
         if (cx >= this.x && cx <= this.x + this.width
                 && cy >= this.y && cy <= this.y + this.height) {
             return true;
-            //this.startDrag(cx, cy);
         } else {
             return false;
-            //this.stopDrag();
         }
         return this;
     };
@@ -43,12 +41,8 @@ class DrawableItem {
         this.strokeStyle = '#000000';
     };
     startDrag (x, y) {
-//        console.log('Start Drag', this.getStartDragX(), DrawController.mouseState.dragStartX, x);
         this.x = this.getStartDragX() - DrawController.mouseState.dragStartX + x;
-        this.y = this.getStartDragY() - DrawController.mouseState.dragStartY + y;
-        
-        
-        
+        this.y = this.getStartDragY() - DrawController.mouseState.dragStartY + y; 
     };
     getStartDragX () {
         if(!this.tempX){
@@ -66,5 +60,6 @@ class DrawableItem {
         this.tempX = this.x;
         this.tempY = this.y;
     };
+    
 }
 
